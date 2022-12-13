@@ -1,0 +1,170 @@
+<div  class="container-fluid g-0 fullDIv">
+<app-header></app-header>
+<main>
+  
+  
+<div class="fullDIv"><nav>
+  <h1>Demo app</h1>
+  <ol>
+    <li><a class="text-black"  routerLink="home">HOME</a></li>
+    <li><a  class="text-black" routerLink="userProfile">ABOUT</a></li>
+    <li><a  class="text-black"  routerLink="userProfile">JOBS</a></li>
+    <li><a  class="text-black" routerLink="userProfile">CLIENTS</a></li>
+    <li><a  class="text-black"  routerLink="userProfile">EMPLOYERS</a></li>
+    <li><a  class="text-black"  routerLink="userProfile">CONTACT</a></li>
+   
+  </ol>
+</nav>
+ <router-outlet></router-outlet>  
+  <div class="main_div">
+    <h1>I'm looking for..</h1>
+    <div class="serac">
+    <input class="form-control border border-dark" type="text" id="serch_job" placeholder="Enter job description">
+    <button class="btn btn-info border border-dark">Search</button><br>
+    
+   
+    
+  </div>
+<div class="check">
+  <input class="form-check-input border border-dark" type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+  <label class="form-check-label ms-1 "  for="vehicle1"> Full Time</label><br>
+  <input  class="form-check-input ms-2 border border-dark" type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+  <label  class="form-check-label ms-1" for="vehicle2"> Part time</label><br>
+</div>
+  </div>
+
+  
+  
+  <div class="add-employee">
+    <button class="btn bg-info btn-jg register" data-bs-toggle="modal" data-bs-target="#exampleModal" #addEmployeeButton>Register</button>
+  </div>
+
+<div class="bg-primary rounded card col-md-10 subs">
+  <p class="text-white text-center mt-4 ">Subscribe to our job Seeker Mailing List</p>
+  <input type="email" class="form-control mb-3 mail" placeholder="Enter your Email Address">
+</div>
+</div>
+  <div class="employees">
+<div class="rbw mt-5">
+  <div class="col text-center">
+   
+  </div>
+  <div class="row mt-4" *ngFor="let employee of employeesToDisplay; let ei = index;">
+    <div class="col">
+      <app-emp [employee]="employee"  (onRemoveEmployee)="removeEmployee($event)" (onEditEmployee)="editEmployee($event)" ></app-emp> 
+       
+        
+    </div>
+  </div>
+</div>
+  </div>
+</main>
+</div>
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Registration Form</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="employeeForm">
+          <div class="row">
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control"  placeholder="First Name" formControlName="firstname">
+                <small *ngIf="!employeeForm.get('firstname')?.valid && employeeForm.get('firstname')?.touched ">
+                 Provide valid name
+                </small>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Last Name" formControlName="lastname">
+                <small *ngIf="!employeeForm.get('lastname')?.valid && employeeForm.get('lastname')?.touched ">
+                  Provide valid lastname
+                 </small>
+              </div>
+            </div>
+            <div class="row mt-1">
+              <div class="col">
+                <input type="email" class="form-control" placeholder="Enter email" formControlName="email">
+                <small *ngIf="!employeeForm.get('email')?.valid && employeeForm.get('email')?.touched ">
+                  Provide valid email
+                 </small>
+              </div>
+              <div class="col">
+                <input type="number" class="form-control" placeholder="Enter phone" formControlName="phone">
+                <small *ngIf="!employeeForm.get('phone')?.valid && employeeForm.get('phone')?.touched ">
+                  Provide valid phone
+                 </small>
+              </div>
+            </div>
+            <div class="row mt-1">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Enter Address" formControlName="address">
+                <small *ngIf="!employeeForm.get('address')?.valid && employeeForm.get('address')?.touched ">
+                  Provide valid Address
+                 </small>
+              </div>
+            </div>
+            <div class="row">
+              <div class="slider mt-1">
+                <label for="age">Age</label>
+                <input type="range" min="20" max="25" value="20" id="age" formControlName="age" oninput="rangeValue.innerText = this.value">
+                <p id="rangeValue">0</p>
+                </div>
+                <div class="row">
+                  <label for="country">Select Country</label>
+                  <select class="form-select mt-1"  id="country" formControlName="country">
+                      <option value="India">India</option>
+                      <option value="Newzeland">Newzeland</option>
+                      <option value="England">England</option>
+
+                  </select>
+                  <small *ngIf="!employeeForm.get('country')?.valid && employeeForm.get('country')?.touched ">
+                    Provide valid country
+                   </small>
+                </div>
+                <div class="row">
+                  <label for="state">Select State</label>
+                  <select class="form-select mt-1"  id="state" formControlName="state">
+                      <option value="Mumbai">Mumbai</option>
+                      <option value="Nashik">Nashik</option>
+                      <option value="Pune">Pune</option>
+
+                  </select>
+                  <small *ngIf="!employeeForm.get('state')?.valid && employeeForm.get('state')?.touched ">
+                    Provide valid state
+                   </small>
+                </div>
+                <div class="row mt-1">
+                  <div class="col">
+                    <input type="text" class="form-control" placeholder="Enter tags" formControlName="tags">
+                    <small *ngIf="!employeeForm.get('tags')?.valid && employeeForm.get('tags')?.touched ">
+                      Provide valid tags
+                     </small>
+                  </div>
+                </div>
+            <div class="row mt-3">
+              <div class="col">
+                <label for="profile" class="form-label">Profile Image</label>
+                <input type="file" class="form-control" id="profile" #fileInput>
+              </div>
+            </div>
+            </div>
+            
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+       
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="!employeeForm" (click)="addEmployee()">Insert</button>
+      </div>
+    </div>
+  </div>
+</div>
